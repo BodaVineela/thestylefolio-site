@@ -113,6 +113,11 @@ nav.links a:hover { color: var(--wine); }
 .tag { position: absolute; display: flex; flex-direction: column; align-items: center; gap: 2px; font-size: 9px; font-weight: 700; }
 .tag::before { content: ""; width: 10px; height: 10px; border-radius: 50%; background: #fff; border: 2.5px solid #7F1D2D; }
 .tag span { background: rgba(255,255,255,.94); padding: 1px 5px; border-radius: 5px; }
+.board { position: relative; height: 290px; background: #F3EEEC; border-radius: 16px; overflow: hidden; }
+.bp { position: absolute; display: grid; place-items: center; filter: drop-shadow(0 4px 5px rgba(42,30,31,.18)); }
+.bp svg { width: 100%; height: 100%; }
+.bp.sel { outline: 2px dashed #7F1D2D; outline-offset: 2px; border-radius: 6px; }
+.plus { width: 22px; height: 22px; border-radius: 50%; background: #7F1D2D; color: #fff; display: grid; place-items: center; font-size: 14px; font-weight: 700; letter-spacing: 0; }
 .tabbar { position: absolute; left: 0; right: 0; bottom: 0; height: 66px; background: rgba(255,255,255,.96); border-top: 1px solid #EAE3E1; display: flex; justify-content: space-around; padding-top: 9px; font-size: 9px; color: #6B5F5E; z-index: 4; }
 .tabbar div { display: flex; flex-direction: column; align-items: center; gap: 3px; }
 .tabbar div.on { color: #7F1D2D; font-weight: 700; }
@@ -256,8 +261,8 @@ footer { padding-block: 56px 70px; }
           </button></li>
           <li><button type="button" data-step="1" aria-current="false">
             <span class="num">2</span>
-            <h3>Build looks</h3>
-            <p>Choose the categories this look needs, from Tops and Shoes to ones you made, then pick a piece for each. Add a borrowed piece too, and keep it out of your closet.</p>
+            <h3>Build looks on a board</h3>
+            <p>Choose the categories this look needs, from Tops and Shoes to ones you made, and pick a piece for each. Then arrange them on a board, size and turn each piece, and share it as a picture.</p>
             <span class="bar"><i></i></span>
           </button></li>
           <li><button type="button" data-step="2" aria-current="false">
@@ -479,22 +484,22 @@ const VIEWS = [
     <div class="label">Colors · read from your photo</div>
     <div class="row"><span class="chip"><i class="dot" style="background:#C9616F"></i>Rose</span><span class="chip"><i class="dot" style="background:#C9A24A"></i>Gold</span><span class="chip" style="color:#7F1D2D">Change</span></div>
   </div>`,
-  // 2. Build a look
+  // 2. A look on its board
   `<div class="view">
-    <div class="navbar"><span class="dim">Cancel</span><b>Build a look</b><span class="act">Save</span></div>
-    <div class="label">Pieces</div>
-    <div class="field" style="display:flex;justify-content:space-between;margin-bottom:8px"><span>5 categories · tap to change</span><span style="color:#6B5F5E">⌄</span></div>
-    <div class="card pad">
-      <div class="slot"><span class="name">Dresses</span><span class="tile">${G.dress("#C9616F")}</span></div>
-      <div class="slot"><span class="name">Shoes</span><span class="tile">${G.heels("#C9A24A")}</span></div>
-      <div class="slot"><span class="name">Bags</span><span class="tile">${G.bag("#2A1E1F")}</span></div>
-      <div class="slot"><span class="name">Jewelry</span><span class="tile">${G.earrings("#C9A24A")}</span><span class="add">+</span></div>
-      <div class="slot"><span class="name">Outerwear</span><span class="add">+</span></div>
+    <div class="navbar"><span class="dim">‹ Looks</span><b>Wedding guest</b><span class="act">Edit</span></div>
+    <div class="row" style="justify-content:flex-end;margin-bottom:8px">
+      <span class="chip" style="color:#7F1D2D;border-color:#E4C9CD">⇪ Share</span>
+      <span class="chip" style="color:#7F1D2D;border-color:#E4C9CD">✋ Arrange board</span>
     </div>
-    <div class="label">Name</div>
-    <div class="field">Wedding guest</div>
-    <div class="label">Event (optional)</div>
-    <div class="field" style="display:flex;justify-content:space-between"><span><i class="dot" style="background:#C9A24A"></i>&nbsp; Sam &amp; Alex's wedding</span><span style="color:#6B5F5E">⌄</span></div>
+    <div class="board">
+      <span class="bp" style="left:2%;top:1%;width:60%;height:74%;transform:rotate(-3deg)">${G.dress("#C9616F")}</span>
+      <span class="bp" style="left:54%;top:8%;width:40%;height:34%;transform:rotate(4deg)">${G.bag("#2A1E1F")}</span>
+      <span class="bp" style="left:44%;top:52%;width:50%;height:36%;transform:rotate(-2deg)">${G.heels("#C9A24A")}</span>
+      <span class="bp sel" style="left:16%;top:68%;width:24%;height:24%;transform:rotate(3deg)">${G.earrings("#C9A24A")}</span>
+    </div>
+    <div style="font-size:10px;color:#6B5F5E;margin:6px 2px 0">Drag to move · pinch to resize</div>
+    <div class="label" style="display:flex;justify-content:space-between;align-items:center">Pieces <span class="plus">+</span></div>
+    <div class="row"><span class="chip">Rose silk midi</span><span class="chip">Gold heels</span><span class="chip">Black clutch</span></div>
   </div>`,
   // 3. Home with the next event
   `<div class="view">
