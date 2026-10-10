@@ -89,6 +89,7 @@ nav.links a:hover { color: var(--wine); }
 .navbar .act { color: #7F1D2D; font-weight: 700; }
 .navbar .dim { color: #7F1D2D; }
 .app-title { font-size: 21px; font-weight: 800; display: flex; align-items: center; gap: 10px; padding: 2px 0 10px; }
+.app-title .me { margin-left: auto; width: 28px; height: 28px; border-radius: 50%; background: #7F1D2D; color: #fff; font-size: 11px; font-weight: 700; display: grid; place-items: center; letter-spacing: .02em; }
 .app-title i { width: 16px; height: 2px; background: #2A1E1F; display: inline-block; box-shadow: 0 5px 0 #2A1E1F, 0 -5px 0 #2A1E1F; }
 .label { font-size: 10px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: #6B5F5E; margin: 10px 0 6px; }
 .tile { background: #E9E3E0; border-radius: 14px; display: grid; place-items: center; position: relative; }
@@ -495,7 +496,7 @@ const VIEWS = [
   </div>`,
   // 3. Home with the next event
   `<div class="view">
-    <div class="app-title"><i></i>TheStyleFolio</div>
+    <div class="app-title"><i></i>TheStyleFolio<span class="me">AR</span></div>
     <div style="font-size:12px;color:#6B5F5E;margin-bottom:8px"><b style="color:#2A1E1F;font-size:15px">2 events</b> in the next 30 days</div>
     <div class="card">
       <div style="height:96px;background:linear-gradient(135deg,#E8C27A,#C9616F);position:relative">
@@ -520,7 +521,7 @@ const VIEWS = [
   </div>`,
   // 4. Style diary
   `<div class="view">
-    <div class="app-title"><i></i>Looks</div>
+    <div class="app-title"><i></i>Looks<span class="me">AR</span></div>
     <div class="seg"><span>Looks</span><span class="on">Style Diary</span><span>Look books</span></div>
     <div class="card">
       <div style="height:230px;background:linear-gradient(160deg,#EADBD6,#D9C3BC);position:relative;display:grid;place-items:center">
