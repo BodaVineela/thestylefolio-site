@@ -42,7 +42,9 @@ h1, h2, h3 { font-family: var(--display); font-weight: 400; text-wrap: balance; 
 p { margin: 0; }
 
 /* Header */
-header.top { padding-block: 18px; }
+header.top { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 50; padding-block: 12px; background: rgba(243, 240, 236, .92); -webkit-backdrop-filter: saturate(1.4) blur(12px); backdrop-filter: saturate(1.4) blur(12px); border-bottom: 1px solid transparent; transition: border-color .2s; }
+header.top.scrolled { border-bottom-color: var(--line); }
+section, #top { scroll-margin-top: 76px; }
 header.top .wrap { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
 .brand { display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--ink); }
 .brand img { width: 38px; height: 38px; }
@@ -50,7 +52,13 @@ header.top .wrap { display: flex; align-items: center; justify-content: space-be
 nav.links { display: flex; gap: 22px; font-size: 15px; }
 nav.links a { color: var(--ink); text-decoration: none; }
 nav.links a:hover { color: var(--wine); }
-@media (max-width: 640px) { nav.links a:not(.cta-link) { display: none; } }
+@media (max-width: 640px) { nav.links { gap: 14px; font-size: 14px; } }
+@media (max-width: 430px) { .brand span { display: none; } }
+.to-top { position: fixed; right: 18px; bottom: calc(18px + env(safe-area-inset-bottom, 0px)); z-index: 60; width: 48px; height: 48px; border-radius: 50%; border: 0; background: var(--wine); color: #fff; display: grid; place-items: center; cursor: pointer; box-shadow: 0 8px 20px -6px rgba(78, 16, 27, .5); opacity: 0; transform: translateY(12px); pointer-events: none; transition: opacity .25s, transform .25s; }
+.to-top.show { opacity: 1; transform: none; pointer-events: auto; }
+.to-top:hover { background: var(--wine-deep); }
+.to-top svg { width: 20px; height: 20px; }
+@media (prefers-reduced-motion: reduce) { .to-top { transition: none; } }
 .cta-link { font-weight: 600; color: var(--wine) !important; }
 
 /* Hero */
@@ -404,6 +412,10 @@ footer { padding-block: 56px 70px; }
   </div>
 </main>
 
+<button type="button" class="to-top" id="to-top" aria-label="Back to top">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 19V5"/><path d="m5 12 7-7 7 7"/></svg>
+</button>
+
 <footer>
   <div class="wrap care">
     <div class="label-tag" aria-label="Care instructions">
@@ -459,6 +471,22 @@ try {
 } catch (e) {
   document.getElementById("qr-caption").textContent = "Open this page on your iPhone to get the app";
 }
+
+/* Sticky header border and the back-to-top button */
+(() => {
+  const header = document.querySelector("header.top");
+  const toTop = document.getElementById("to-top");
+  const onScroll = () => {
+    const y = window.scrollY;
+    header.classList.toggle("scrolled", y > 8);
+    toTop.classList.toggle("show", y > 600);
+  };
+  addEventListener("scroll", onScroll, { passive: true });
+  onScroll();
+  toTop.addEventListener("click", () => {
+    window.scrollTo({ top: 0, behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth" });
+  });
+})();
 
 /* Privacy page as #privacy */
 function route() {
