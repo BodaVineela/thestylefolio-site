@@ -62,13 +62,15 @@ nav.links a:hover { color: var(--wine); }
 .cta-link { font-weight: 600; color: var(--wine) !important; }
 
 /* Hero */
-.hero { padding-block: 28px 64px; }
-.hero .wrap { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, .9fr); gap: 48px; align-items: center; }
+.hero { padding-block: 12px 56px; }
+.hero .wrap { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, .9fr); gap: 48px; align-items: start; }
+.hero .wrap > div:first-child { padding-top: 28px; }
+@media (max-width: 880px) { .hero .wrap > div:first-child { padding-top: 8px; } }
 @media (max-width: 880px) { .hero .wrap { grid-template-columns: minmax(0, 1fr); } }
 .masthead { font-size: clamp(44px, 7vw, 88px); letter-spacing: -.01em; color: var(--ink); }
 .masthead em { font-style: italic; color: var(--wine); }
 .lede { margin-top: 22px; font-size: 19px; color: var(--muted); max-width: 34em; }
-.issue { display: flex; flex-wrap: wrap; gap: 8px 18px; margin-bottom: 22px; font-size: 13px; color: var(--muted); letter-spacing: .04em; }
+.issue { display: flex; flex-wrap: wrap; gap: 8px 18px; margin-bottom: 12px; font-size: 13px; color: var(--muted); letter-spacing: .04em; }
 .issue b { color: var(--ink); font-weight: 600; }
 .actions { margin-top: 30px; display: flex; flex-wrap: wrap; gap: 14px; align-items: center; }
 .btn { display: inline-flex; align-items: center; gap: 10px; padding: 14px 22px; border-radius: 999px; font: 600 16px var(--body); text-decoration: none; border: 1px solid transparent; cursor: pointer; }
