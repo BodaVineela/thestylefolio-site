@@ -257,7 +257,7 @@ footer { padding-block: 56px 70px; }
           <li><button type="button" data-step="1" aria-current="false">
             <span class="num">2</span>
             <h3>Build looks</h3>
-            <p>Pick a top, bottom, shoes and jewelry from your closet. Add a borrowed piece too, and keep it out of your closet.</p>
+            <p>Choose the categories this look needs, from Tops and Shoes to ones you made, then pick a piece for each. Add a borrowed piece too, and keep it out of your closet.</p>
             <span class="bar"><i></i></span>
           </button></li>
           <li><button type="button" data-step="2" aria-current="false">
@@ -482,12 +482,14 @@ const VIEWS = [
   // 2. Build a look
   `<div class="view">
     <div class="navbar"><span class="dim">Cancel</span><b>Build a look</b><span class="act">Save</span></div>
+    <div class="label">Pieces</div>
+    <div class="field" style="display:flex;justify-content:space-between;margin-bottom:8px"><span>5 categories · tap to change</span><span style="color:#6B5F5E">⌄</span></div>
     <div class="card pad">
-      <div class="slot"><span class="name">Dress</span><span class="tile">${G.dress("#C9616F")}</span></div>
+      <div class="slot"><span class="name">Dresses</span><span class="tile">${G.dress("#C9616F")}</span></div>
       <div class="slot"><span class="name">Shoes</span><span class="tile">${G.heels("#C9A24A")}</span></div>
-      <div class="slot"><span class="name">Bag</span><span class="tile">${G.bag("#2A1E1F")}</span></div>
+      <div class="slot"><span class="name">Bags</span><span class="tile">${G.bag("#2A1E1F")}</span></div>
       <div class="slot"><span class="name">Jewelry</span><span class="tile">${G.earrings("#C9A24A")}</span><span class="add">+</span></div>
-      <div class="slot"><span class="name">Layer</span><span class="add">+</span></div>
+      <div class="slot"><span class="name">Outerwear</span><span class="add">+</span></div>
     </div>
     <div class="label">Name</div>
     <div class="field">Wedding guest</div>
