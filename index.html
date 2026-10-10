@@ -132,7 +132,22 @@ section { padding-block: 72px; }
 /* Walkthrough */
 .how { background: var(--card); border-block: 1px solid var(--line); }
 .how .grid { display: grid; grid-template-columns: minmax(0, 1fr) 320px; gap: 56px; align-items: center; }
-@media (max-width: 880px) { .how .grid { grid-template-columns: minmax(0, 1fr); } .how .stage { order: -1; } }
+#step-caption { display: none; }
+@media (max-width: 880px) {
+  .how .grid { grid-template-columns: minmax(0, 1fr); gap: 18px; }
+  .how .grid > div:first-child { display: contents; }
+  .how .sec-head { order: 1; margin-bottom: 0; }
+  .how .steps { order: 2; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 6px; }
+  .how .stage { order: 3; }
+  #step-caption { order: 4; display: block; text-align: center; color: var(--muted); font-size: 15.5px; max-width: 30em; margin: 0 auto; min-height: 4.8em; }
+  .how .player { order: 5; justify-content: center; margin-top: 0; }
+  .how .steps button { grid-template-columns: minmax(0, 1fr); justify-items: center; text-align: center; padding: 10px 4px 14px; gap: 4px; }
+  .how .steps .num { grid-row: auto; font-size: 22px; }
+  .how .steps h3 { font-size: 12.5px; line-height: 1.25; }
+  .how .steps p { display: none; }
+  .how .steps .bar { left: 8px; right: 8px; bottom: 5px; }
+  .how .phone { width: 250px; }
+}
 .steps { list-style: none; padding: 0; margin: 0; display: grid; gap: 6px; counter-reset: step; }
 .steps button {
   all: unset; box-sizing: border-box; cursor: pointer; display: grid; grid-template-columns: 44px minmax(0, 1fr); gap: 4px 14px;
@@ -283,6 +298,7 @@ footer { padding-block: 56px 70px; }
       <div class="stage" aria-hidden="true">
         <div class="phone"><div class="screen" id="demo-screen"></div></div>
       </div>
+      <p id="step-caption" aria-live="polite"></p>
     </div>
   </section>
 
@@ -580,6 +596,7 @@ function select(i) {
     const bar = b.querySelector(".bar i"); bar.style.animation = "none"; void bar.offsetWidth; bar.style.animation = "";
   });
   demoShow(i);
+  document.getElementById("step-caption").textContent = buttons[i].querySelector("p").textContent;
   schedule();
 }
 function schedule() {
@@ -595,6 +612,19 @@ function setPlaying(p) {
   schedule();
 }
 buttons.forEach((b, i) => b.addEventListener("click", () => { select(i); }));
+// Swipe the phone to move between steps.
+(() => {
+  const demo = document.getElementById("demo-screen");
+  let startX = null;
+  demo.addEventListener("touchstart", (e) => { startX = e.touches[0].clientX; }, { passive: true });
+  demo.addEventListener("touchend", (e) => {
+    if (startX === null) return;
+    const dx = e.changedTouches[0].clientX - startX;
+    startX = null;
+    if (Math.abs(dx) < 40) return;
+    select((current + (dx < 0 ? 1 : buttons.length - 1)) % buttons.length);
+  });
+})();
 toggle.addEventListener("click", () => setPlaying(!playing));
 setPlaying(playing);
 select(0);
